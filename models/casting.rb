@@ -3,7 +3,8 @@ require_relative("../db/sql_runner")
 
 class Casting
 
-attr_reader :movie_id, :star_id, :id
+attr_accessor :movie_id, :star_id
+attr_reader :id
 
 def initialize(options)
   @movie_id = options['movie_id']
@@ -20,7 +21,11 @@ def save()
   @id = casting["id"].to_i
 end
 
-
+def update()
+  sql = "UPDATE castings SET (movie_id, star_id) = ($1, $2) WHERE id = $3"
+  values = [@movie_id, @star_id, @id]
+  SqlRunner.run(sql, values)
+end
 
 def self.all()
   sql = "SELECT * FROM castings"

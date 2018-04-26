@@ -3,7 +3,8 @@ require_relative("../db/sql_runner")
 
 class Movie
 
-attr_reader :title, :genres, :rating, :id
+attr_accessor :title, :genres, :rating
+attr_reader :id
 
 def initialize(options)
   @title = options['title']
@@ -24,7 +25,11 @@ end
 
 
 
-
+def update()
+  sql = "UPDATE movies SET (title, genre, rating) = ($1, $2, $3) WHERE id = $4"
+  values = [@title, @genre, @rating, @id]
+  SqlRunner.run(sql, values)
+end
 
 def self.all()
   sql = "SELECT * FROM movies"
