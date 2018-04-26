@@ -4,6 +4,9 @@ require_relative("models/casting")
 
 require("pry-byebug")
 
+Casting.delete_all()
+Star.delete_all()
+Movie.delete_all()
 
 star1 = Star.new({
   'first_name' => 'Postman',

@@ -12,7 +12,7 @@ def initialize(options)
 end
 
 def save()
-  sql = "INSERT INTO stars (movie_id, star_id)
+  sql = "INSERT INTO castings (movie_id, star_id)
   VALUES ($1, $2)
   RETURNING id"
   values = [@movie_id, @star_id]
@@ -20,4 +20,12 @@ def save()
   @id = casting["id"].to_i
 end
 
+
+
+
+
+def self.delete_all()
+  sql = "DELETE FROM castings"
+  SqlRunner.run(sql)
+end
 end

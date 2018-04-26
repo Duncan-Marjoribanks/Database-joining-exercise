@@ -14,7 +14,7 @@ end
 
 
 def save()
-  sql = "INSERT INTO stars (title, genre, rating)
+  sql = "INSERT INTO movies (title, genre, rating)
   VALUES ($1, $2, $3)
   RETURNING id"
   values = [@title, @genre, @rating]
@@ -22,4 +22,14 @@ def save()
   @id = movie["id"].to_i
 end
 
+
+
+
+
+
+
+def self.delete_all()
+  sql = "DELETE FROM movies"
+  SqlRunner.run(sql)
+end
 end
