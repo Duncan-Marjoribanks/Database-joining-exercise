@@ -26,6 +26,16 @@ def update()
   values = [@movie_id, @star_id, @id]
   SqlRunner.run(sql, values)
 end
+#
+# def star()
+#   sql = "SELECT * FROM stars WHERE id = $1"
+#   values = [@star_id]
+#   star_hash = SqlRunner.run(sql, values).first
+#   return Star.new(star_hash)
+# end
+
+
+
 
 def self.all()
   sql = "SELECT * FROM castings"

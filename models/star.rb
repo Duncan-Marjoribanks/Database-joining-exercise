@@ -27,6 +27,14 @@ def update()
   SqlRunner.run(sql, values)
 end
 
+def movies()
+  sql = "SELECT movies.* FROM movies INNER JOIN castings
+  ON castings.movie_id = movies.id WHERE castings.star_id = $1"
+  values = [@id]
+  movie_hashes = SqlRunner.run(sql, values)
+  movies = Movie.map_items(movie_hashes)
+  return movies
+end
 
 def self.all()
   sql = "SELECT * FROM stars"

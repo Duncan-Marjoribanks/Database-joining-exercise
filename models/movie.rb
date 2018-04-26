@@ -24,6 +24,15 @@ def save()
 end
 
 
+def stars()
+  sql = "SELECT stars.* FROM stars INNER JOIN castings
+  ON castings.star_id = stars.id WHERE castings.movie_id = $1"
+  values = [@id]
+  star_hashes = SqlRunner.run(sql, values)
+  stars = Star.map_items(star_hashes)
+  return stars
+end
+
 
 def update()
   sql = "UPDATE movies SET (title, genre, rating) = ($1, $2, $3) WHERE id = $4"
