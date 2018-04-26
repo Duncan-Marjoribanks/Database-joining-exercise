@@ -22,7 +22,16 @@ end
 
 
 
+def self.all()
+  sql = "SELECT * FROM castings"
+  casting_hashes = SqlRunner.run(sql)
+  return Casting.map_items(casting_hashes)
+end
 
+def self.map_items(casting_hashes)
+  result = casting_hashes.map{|casting_hash| Casting.new(casting_hash)}
+  return result
+end
 
 def self.delete_all()
   sql = "DELETE FROM castings"
